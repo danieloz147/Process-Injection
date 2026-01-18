@@ -41,6 +41,51 @@ Windows provides three primary APIs for creating new processes:
 
 All three APIs ultimately invoke the kernel function **`NtCreateUserProcess`**, which performs the actual process creation at the kernel level.
 
+**Process Creation Call Chain Diagram:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            Creating Process                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  Kernel32.dll                  Advapi32.dll                SvcHost.Exe     │
+│  ┌──────────────────┐         ┌──────────────────┐      ┌────────────────┐ │
+│  │ CreateProcess    │         │ CreateProcess    │      │ SecLogon.dll   │ │
+│  │ CreateProcessAs  │         │ WithLogonW       │      │                │ │
+│  │ User             │         │ CreateProcess    │      │ SlrCreateProcess│ │
+│  └────────┬─────────┘         │ WithTokenW       │      │ WithLogon      │ │
+│           │                   └────────┬─────────┘      └────────┬───────┘ │
+│           └───────────────────────────┬────────────────────────┬│          │
+│                                       │                        ││  RPC     │
+│           CreateProcessInternal       │                        ││  Call    │
+│           ┌──────────────────────────┘                        ││          │
+│           │                                                   ││          │
+│           └─────────────────────────────────────────────────┘│          │
+│                                                               │          │
+│                      Kernel32.dll                            │          │
+│                      ┌────────────────────┐                  │          │
+│                      │ CreateProcessAs    │<─────────────────┘          │
+│                      │ User               │                             │
+│                      │ NtDll.dll          │                             │
+│                      └────────┬───────────┘                             │
+│                               │                                         │
+└───────────────────────────────┼─────────────────────────────────────────┘
+                                │
+                      User Mode │
+                      ──────────┼──────────────────────────────────────────
+                      Kernel    │
+                      Mode      │
+                                │
+                ┌───────────────┴────────────────┐
+                │                                │
+            ┌───▼────────────────────┐    ┌─────▼──────────────────┐
+            │  NtCreateUserProcess   │    │  NtCreateUserProcess   │
+            │  (Executive)           │    │  (Executive)           │
+            └────────────────────────┘    └────────────────────────┘
+```
+
+
+
 ### Threads: The Execution Unit
 
 A **thread** is the actual execution unit that Windows schedules to run on a CPU:
@@ -68,6 +113,59 @@ Every process on Windows operates within its own **private virtual address space
 - **Virtual Memory**: The memory space visible to a process. On 32-bit systems, this is typically 4 GB (2 GB user-mode, 2 GB kernel-mode). On 64-bit systems, much larger (typically 128 TB or more per process).
 - **Physical Memory**: Actual RAM installed in the computer. The Windows memory manager translates virtual addresses to physical addresses.
 - **Paging**: When RAM is exhausted, the memory manager can page (write) data to disk, freeing physical memory for other processes. Paged data is retrieved back into RAM on demand.
+
+**Virtual Memory Translation Diagram:**
+
+```
+Virtual Memory          Physical Memory          Virtual Memory
+(Process A)             (Shared RAM)             (Process B)
+
+┌──────────────┐                               ┌──────────────┐
+│ Virtual      │        ┌──────────────┐       │ Virtual      │
+│ Page 1       │───────▶│ Physical     │       │ Page 1       │
+│ (Green)      │        │ Frame 1      │◀──────│ (Blue)       │
+└──────────────┘        │ (Orange)     │       └──────────────┘
+                        └──────────────┘
+┌──────────────┐        ┌──────────────┐       ┌──────────────┐
+│ Virtual      │        │              │       │ Virtual      │
+│ Page 2       │───────▶│ Physical     │       │ Page 2       │
+│ (Green)      │        │ Frame 2      │       │ (Green)      │
+└──────────────┘        │ (Orange)     │       └──────────────┘
+                        └──────────────┘
+┌──────────────┐        ┌──────────────┐       ┌──────────────┐
+│ Virtual      │        │              │       │ Virtual      │
+│ Page 3       │───────▶│ Physical     │       │ Page 3       │
+│ (Orange)     │        │ Frame 3      │       │ (Blue)       │
+└──────────────┘        │ (Gray)       │       └──────────────┘
+                        └──────────────┘
+┌──────────────┐        ┌──────────────┐       ┌──────────────┐
+│ Virtual      │        │              │       │ Virtual      │
+│ Page 4       │───────▶│ Physical     │◀──────│ Page 4       │
+│ (Green)      │        │ Frame 4      │       │ (Green)      │
+└──────────────┘        │ (Orange)     │       └──────────────┘
+                        └──────────────┘
+┌──────────────┐                               ┌──────────────┐
+│ Virtual      │        ┌──────────────┐       │ Virtual      │
+│ Page 5       │───────▶│              │       │ Page 5       │
+│ (Orange)     │        │ Physical     │       │ (Blue)       │
+└──────────────┘        │ Frame 5      │       └──────────────┘
+                        │ (Orange)     │
+┌──────────────┐        └──────────────┘
+│ Virtual      │
+│ Page 6       │        ┌──────────────┐
+│ (Green)      │───────▶│              │
+└──────────────┘        │ Disk (Paged) │
+                        └──────────────┘
+```
+
+**Key Observations:**
+- Each process has its own virtual address space (left and right columns)
+- Virtual pages map to shared physical frames (middle)
+- Multiple processes can map to the same physical frame (resource sharing)
+- Pages can be paged to disk when RAM is full (gray/disk area)
+- Isolation is maintained: Process A's virtual addresses are independent from Process B's
+
+
 
 **Memory Pages:**
 
@@ -109,6 +207,78 @@ An access token contains:
 - **Group SIDs** – Lists of groups the user belongs to (e.g., Administrators, Domain Users)
 - **User Privileges** – Special rights granted to the user (e.g., SeDebugPrivilege, SeTakeOwnershipPrivilege)
 - **Integrity Level** – Indicates the trustworthiness of the process (Low, Medium, High, System)
+
+**Access Token and Thread Hierarchy Diagram:**
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                       Process and Thread Security                         │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌───────────────┐                     ┌──────────────────────────┐     │
+│   │ ACL │ Process │◄─────────────────────┤ Access Token             │     │
+│   └───────────────┘                     │  ┌────────────────────┐   │     │
+│           │                             │  │ User's SID         │   │     │
+│           │                             │  │ Group SIDs         │   │     │
+│           │                             │  │ Privileges         │   │     │
+│           ├─────────────┬───────────────┤  │ Owner SID          │   │     │
+│           │             │               │  │ Default ACL        │   │     │
+│           │             │               │  │ ...                │   │     │
+│           │             │               │  └────────────────────┘   │     │
+│           │             │               └──────────────────────────┘     │
+│           │             │                                                 │
+│      ┌────▼────┐   ┌────▼────┐   ┌────────────┐                         │
+│      │ ACL     │   │ ACL     │   │ ACL        │                         │
+│      │Thread 1 │   │Thread 2 │   │ Thread 3   │                         │
+│      └────┬────┘   └────┬────┘   └────┬───────┘                         │
+│           │             │             │                                  │
+│      ┌────▼──────────┐  │             │                                  │
+│      │Access Token   │  │             │                                  │
+│      │┌────────────┐ │  │             │                                  │
+│      ││User's SID  │ │  │             │                                  │
+│      ││Group SIDs  │ │  │             │                                  │
+│      ││Privileges  │ │  │             │                                  │
+│      ││Owner SID   │ │  │             │                                  │
+│      ││Default ACL │ │  │             │                                  │
+│      ││...         │ │  │             │                                  │
+│      │└────────────┘ │  │             │                                  │
+│      └────────────────┘  │             │                                  │
+│                          │             │                                  │
+│                     ┌────▼──────────┐  │                                  │
+│                     │Access Token   │  │                                  │
+│                     │┌────────────┐ │  │                                  │
+│                     ││User's SID  │ │  │                                  │
+│                     ││Group SIDs  │ │  │                                  │
+│                     ││Privileges  │ │  │                                  │
+│                     ││Owner SID   │ │  │                                  │
+│                     ││Default ACL │ │  │                                  │
+│                     ││...         │ │  │                                  │
+│                     │└────────────┘ │  │                                  │
+│                     └────────────────┘  │                                  │
+│                                         │                                  │
+│                                    ┌────▼──────────┐                      │
+│                                    │Access Token   │                      │
+│                                    │┌────────────┐ │                      │
+│                                    ││User's SID  │ │                      │
+│                                    ││Group SIDs  │ │                      │
+│                                    ││Privileges  │ │                      │
+│                                    ││Owner SID   │ │                      │
+│                                    ││Default ACL │ │                      │
+│                                    ││...         │ │                      │
+│                                    │└────────────┘ │                      │
+│                                    └────────────────┘                      │
+│                                                                            │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+**Key Security Concepts:**
+
+- **Process Token**: The primary access token defines the security context for the entire process
+- **Thread Tokens**: Each thread inherits the process's primary token by default, but can impersonate a different token
+- **DACL Hierarchy**: Both processes and threads have associated DACLs that restrict who can access them
+- **Access Checks**: When code tries to access a protected resource (like another process), Windows checks if the caller's token allows the access
+
+
 
 ### Thread Impersonation
 
