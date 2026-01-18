@@ -7,7 +7,7 @@ This repository provides educational material about process injection—a fundam
 ⚠️ **Critical Information**: More detailed technical documentation, security considerations, and step-by-step implementation guides are located in:
 - [TECHNICAL.md](TECHNICAL.md) – In-depth Windows internals, API details, and processes in general
 - [Shellcode/README.md](Shellcode/README.md) – Shellcode generation and extraction
-- [Classic-Injection/README.md](Classic-Injection/README.md) – DLL injection techniques (if available)
+- [Classic-Injection/README.md](Classic-Injection/README.md) – Classic injection technique
 
 These files contain essential information about prerequisites, compilation steps, and security implications.
 
