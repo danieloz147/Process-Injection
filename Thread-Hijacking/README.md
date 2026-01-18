@@ -22,6 +22,10 @@ Thread hijacking (also called context hijacking) involves:
 
 The example demonstrates **self-process thread hijacking**—creating and hijacking a thread within the same process.
 
+### Alternative Variant: Hijacking Existing Threads
+
+An alternative approach involves enumerating existing threads in a running process, suspending a selected thread, modifying its context, and resuming execution. However, this method is **generally discouraged** because hijacking an active thread disrupts its original functionality and can destabilize or crash the target process.
+
 **Flow:**
 ```
 Main Process
