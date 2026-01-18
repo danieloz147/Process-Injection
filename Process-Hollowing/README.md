@@ -254,12 +254,6 @@ Releases handles. The process continues executing with injected shellcode.
 
 ## Building
 
-### Build with MSVC (Visual Studio Developer Command Prompt)
-
-```cmd
-cl /nologo "Process-Hollowing.c" ntdll.lib
-```
-
 ### Build with MinGW (gcc)
 
 ```bash
