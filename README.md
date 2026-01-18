@@ -7,7 +7,12 @@ This repository provides educational material about process injection—a fundam
 ⚠️ **Critical Information**: More detailed technical documentation, security considerations, and step-by-step implementation guides are located in:
 - [TECHNICAL.md](TECHNICAL.md) – In-depth Windows internals, API details, and processes in general
 - [Shellcode/README.md](Shellcode/README.md) – Shellcode generation and extraction
-- [Classic-Injection/README.md](Classic-Injection/README.md) – Classic injection technique
+- [Classic-Injection/README.md](Classic-Injection/README.md) – Self-injection technique
+- [Classic-Remote-Injection/README.md](Classic-Remote-Injection/README.md) – Remote process injection
+- [Thread-Hijacking/README.md](Thread-Hijacking/README.md) – Thread context manipulation
+- [Asynchronous-Procedure-Calls-Injection/README.md](Asynchronous-Procedure-Calls-Injection/README.md) – APC queuing technique
+- [Early-Bird-Injection/README.md](Early-Bird-Injection/README.md) – Early-bird APC injection
+- [Process-Hollowing/README.md](Process-Hollowing/README.md) – Process hollowing and entry point overwriting
 
 These files contain essential information about prerequisites, compilation steps, and security implications.
 
@@ -119,40 +124,60 @@ Before attempting to understand or implement process injection, you should have 
 
 This repository covers several injection techniques:
 
-### 1. **Classic DLL Injection**
-- Inject a DLL path into a target process
-- Target process calls `LoadLibrary()` to load the DLL
-- DLL's `DllMain()` executes in target context
-- Simplest approach but leaves traces
+### 1. **Classic Shellcode Injection (Self-Injection)**
+- Allocate memory in the current process
+- Write shellcode to allocated memory
+- Execute via `CreateThread()`
+- Simplest approach for learning fundamentals
+- **See:** [Classic-Injection/README.md](Classic-Injection/README.md)
 
-### 2. **Shellcode Injection**
-- Inject raw machine code (shellcode) into target process memory
-- Allocate memory, write code, execute via `CreateRemoteThread()`
-- More direct and potentially stealthier
-- Requires position-independent code
+### 2. **Remote Shellcode Injection**
+- Inject raw machine code into a different process
+- Allocate memory with `VirtualAllocEx()`
+- Write code with `WriteProcessMemory()`
+- Execute via `CreateRemoteThread()`
+- **See:** [Classic-Remote-Injection/README.md](Classic-Remote-Injection/README.md)
 
-### 3. **Process Hollowing / Runpe**
-- Create a new process in suspended state
-- Unmap its original image from memory
-- Inject new code into the clean memory space
-- Resume the process (appears to run legitimate executable)
+### 3. **Thread Hijacking (Context Hijacking)**
+- Create a suspended thread
+- Modify thread context (CPU registers)
+- Change RIP/EIP to point to shellcode
+- Resume thread to execute shellcode
+- **See:** [Thread-Hijacking/README.md](Thread-Hijacking/README.md)
 
 ### 4. **APC Injection (Asynchronous Procedure Call)**
-- Queue an APC to a target thread
-- APC executes in target thread context when it enters alertable state
+- Queue an APC to an existing thread in target process
+- APC executes when thread enters alertable state
 - More subtle than `CreateRemoteThread()`
+- Requires thread to call alertable wait functions
+- **See:** [Asynchronous-Procedure-Calls-Injection/README.md](Asynchronous-Procedure-Calls-Injection/README.md)
 
-### 5. **Hook-based Injection**
-- Inject into processes that load specific DLLs
-- Common targets: Notepad, Explorer, browser processes
+### 5. **Early-Bird APC Injection**
+- Create a new process in suspended state
+- Queue APC on primary thread before process initialization
+- Resume process—APC guaranteed to execute
+- Overcomes alertable state requirement of standard APC
+- **See:** [Early-Bird-Injection/README.md](Early-Bird-Injection/README.md)
+
+### 6. **Process Hollowing (Entry Point Overwriting)**
+- Create process in suspended state
+- Parse PE structure to locate entry point
+- Overwrite entry point with shellcode
+- Resume process to execute shellcode instead of original code
+- **See:** [Process-Hollowing/README.md](Process-Hollowing/README.md)
 
 ---
 
 ## Repository Structure
 
 - **[Shellcode/](Shellcode/)** – Building and extracting shellcode using Donut
-- **[Classic-Injection/](Classic-Injection/)** – DLL injection examples
-- **[Advanced Techniques/](Advanced-Techniques/)** *(placeholder)* – Process hollowing, APC injection, etc.
+- **[Classic-Injection/](Classic-Injection/)** – Self-injection (current process)
+- **[Classic-Remote-Injection/](Classic-Remote-Injection/)** – Remote process injection
+- **[Thread-Hijacking/](Thread-Hijacking/)** – Thread context manipulation
+- **[Asynchronous-Procedure-Calls-Injection/](Asynchronous-Procedure-Calls-Injection/)** – APC queuing injection
+- **[Early-Bird-Injection/](Early-Bird-Injection/)** – Early-bird APC technique
+- **[Process-Hollowing/](Process-Hollowing/)** – Process hollowing and entry point overwriting
+- **[TECHNICAL.md](TECHNICAL.md)** – Comprehensive Windows internals documentation
 
 ---
 
@@ -210,9 +235,13 @@ Before diving into the code, ensure you understand:
 
 1. **Review prerequisites** – Ensure you have the foundational knowledge
 2. **Study Windows API** – Familiarize yourself with process and memory APIs
-3. **Start with examples** – Begin with the Shellcode section and Classic Injection
-4. **Experiment safely** – Use isolated VMs or dedicated lab machines
-5. **Document everything** – Keep notes on what you learn and test
+3. **Read TECHNICAL.md** – Understand Windows internals and process fundamentals
+4. **Start with shellcode generation** – Follow [Shellcode/README.md](Shellcode/README.md)
+5. **Begin with self-injection** – Work through [Classic-Injection/README.md](Classic-Injection/README.md)
+6. **Progress to remote injection** – Move to [Classic-Remote-Injection/README.md](Classic-Remote-Injection/README.md)
+7. **Explore advanced techniques** – Try thread hijacking, APC injection, and process hollowing
+8. **Experiment safely** – Use isolated VMs or dedicated lab machines
+9. **Document everything** – Keep notes on what you learn and test
 
 ---
 
