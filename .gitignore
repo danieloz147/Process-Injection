@@ -132,7 +132,6 @@ Thumbs.db
 .DS_Store
 
 # Build artifacts
-*.dll
 *.obj
 *.o
 
