@@ -1,0 +1,12 @@
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\bin\x64\Debug\net9.0\StartUp-Hooks.deps.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\bin\x64\Debug\net9.0\StartUp-Hooks.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\bin\x64\Debug\net9.0\StartUp-Hooks.pdb
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.AssemblyInfoInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.AssemblyInfo.cs
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.csproj.CoreCompileInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.sourcelink.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\refint\StartUp-Hooks.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\StartUp-Hooks.pdb
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\StartUp-Hooks\obj\x64\Debug\net9.0\ref\StartUp-Hooks.dll
