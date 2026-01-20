@@ -1,6 +1,6 @@
 # Thread Hijacking
 
-This folder demonstrates **thread hijacking**—a process injection technique where an existing thread is suspended, its execution context is modified, and then resumed to execute shellcode.
+This folder demonstrates **thread hijacking** - a process injection technique where an existing thread is suspended, its execution context is modified, and then resumed to execute shellcode.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
@@ -20,7 +20,7 @@ Thread hijacking (also called context hijacking) involves:
 
 ### In This Folder
 
-The example demonstrates **self-process thread hijacking**—creating and hijacking a thread within the same process.
+The example demonstrates **self-process thread hijacking** - creating and hijacking a thread within the same process.
 
 ### Alternative Variant: Hijacking Existing Threads
 
@@ -129,7 +129,7 @@ ResumeThread(hThread);
 printf("Thread resumed to execute shellcode.\n");
 ```
 
-Resumes the thread—it now executes from the shellcode address.
+Resumes the thread - it now executes from the shellcode address.
 
 ### Cleanup
 
