@@ -1,6 +1,6 @@
 # Process-Injection
 
-This repository provides educational material about process injection—a fundamental technique in systems programming and security research. It includes examples, explanations, and practical demonstrations intended for authorized security testing and learning only.
+This repository provides educational material about process injection - a fundamental technique in systems programming and security research. It includes examples, explanations, and practical demonstrations intended for authorized security testing and learning only.
 
 **Important Disclaimer**: Do not use this information to compromise systems you do not own or have explicit authorization to test. Unauthorized process injection is illegal in most jurisdictions and violates computer fraud and abuse laws.
 
@@ -155,7 +155,7 @@ This repository covers several injection techniques:
 ### 5. **Early-Bird APC Injection**
 - Create a new process in suspended state
 - Queue APC on primary thread before process initialization
-- Resume process—APC guaranteed to execute
+- Resume process - APC guaranteed to execute
 - Overcomes alertable state requirement of standard APC
 - **See:** [Early-Bird-Injection/README.md](Early-Bird-Injection/README.md)
 
