@@ -1,4 +1,4 @@
-# SimpleMessageBox — Build Guide and Educational Notes
+# SimpleMessageBox - Build Guide and Educational Notes
 
 This folder contains a tiny Windows program that shows a classic message box. It’s a minimal, benign example used to demonstrate compiling a Windows PE and to provide high‑level (non‑actionable) educational context about “shellcode” and tooling discussed in security research.
 
@@ -21,7 +21,7 @@ int main() {
 
 - Windows 10/11
 - One of the following build toolchains:
-	- Microsoft Visual C++ (MSVC) — e.g., Visual Studio or Build Tools
+	- Microsoft Visual C++ (MSVC) - e.g., Visual Studio or Build Tools
 	- MinGW-w64 (for `gcc`)
 
 ## Build
@@ -212,7 +212,7 @@ unsigned char shellcode[] = {
 };
 ```
 
-## EDR/AV Evasion — Not Covered in This Repository
+## EDR/AV Evasion - Not Covered in This Repository
 
 ### What Is EDR/AV Evasion?
 
