@@ -63,11 +63,11 @@ dotnet build -p:PlatformTarget=x64
 
 You must tell the CLR to use your manager and make sure the assembly is loadable.
 
-Option 1 — Place DLL next to the executable:
+Option 1 - Place DLL next to the executable:
 - Copy `ADM_Injection.dll` to the same directory as the target EXE (e.g., `ngentask.exe`).
 - This is the simplest way to satisfy probing.
 
-Option 2 — Add probing path via app.config:
+Option 2 - Add probing path via app.config:
 Create `ngentask.exe.config` beside the EXE:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -83,7 +83,7 @@ Create `ngentask.exe.config` beside the EXE:
 </configuration>
 ```
 
-Option 3 — Specify the AppDomainManager in an application config file:
+Option 3 - Specify the AppDomainManager in an application config file:
 Create a `.config` file alongside the target executable, with a filename that matches the application (for example, `ngentask.exe.config`). Declare the assembly and type so the CLR uses your manager:
 
 ```xml
@@ -98,7 +98,7 @@ Create a `.config` file alongside the target executable, with a filename that ma
 
 Ensure `ADM_Injection.dll` is loadable (ideally placed next to the EXE or resolvable via probing/GAC). The CLR will load the specified assembly and instantiate the given type as the `AppDomainManager`.
 
-Option 4 — Environment variables (CLR `COMPLUS_`):
+Option 4 - Environment variables (CLR `COMPLUS_`):
 Some hosts honor environment variables for the manager assembly and type.
 ```powershell
 # Set for current PowerShell session
@@ -170,7 +170,7 @@ $env:DOTNET_STARTUP_HOOKS = "C:\path\to\StartupHook.dll"
 - **Cross-platform**: Works for self-contained or framework-dependent apps; paths and DLL formats must match host OS.
 - **Use cases**: Observability (logging/telemetry), policy enforcement, instrumentation. Handle with care due to security implications.
 
-Reference and further reading: .NET Startup Hooks by Rasta Mouse — https://rastamouse.me/net-startup-hooks/
+Reference and further reading: .NET Startup Hooks by Rasta Mouse - https://rastamouse.me/net-startup-hooks/
 
 ---
 
@@ -194,4 +194,4 @@ Reference and further reading: .NET Startup Hooks by Rasta Mouse — https://ras
 - Microsoft Docs: AppDomainManager class
 - .NET runtime configuration: Probing paths and assembly binding
 - .NET Startup Hooks (dotnet/runtime docs)
-- Rasta Mouse: .NET Startup Hooks — https://rastamouse.me/net-startup-hooks/
+- Rasta Mouse: .NET Startup Hooks - https://rastamouse.me/net-startup-hooks/
