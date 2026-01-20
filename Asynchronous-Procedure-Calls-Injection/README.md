@@ -1,6 +1,6 @@
 # APC Injection (Asynchronous Procedure Call Injection)
 
-This folder demonstrates **APC injection**—a process injection technique that queues code execution on existing threads rather than creating new ones.
+This folder demonstrates **APC injection** - a process injection technique that queues code execution on existing threads rather than creating new ones.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
@@ -32,7 +32,7 @@ When the thread calls one of these APIs, the APC callback executes before the AP
 
 ### In This Folder
 
-The example demonstrates **remote APC injection**—injecting shellcode into a different process via APC on an existing thread.
+The example demonstrates **remote APC injection** - injecting shellcode into a different process via APC on an existing thread.
 
 **Flow:**
 ```
