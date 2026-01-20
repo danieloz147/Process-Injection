@@ -97,7 +97,7 @@ A **thread** is the actual execution unit that Windows schedules to run on a CPU
 **Thread Creation APIs:**
 
 - **`CreateThread`** – Creates a new thread within the current process. The new thread starts executing at a specified function address.
-- **`CreateRemoteThread`** – Creates a new thread in a different process. This is a foundational technique for process injection—write code to a target process's memory, then create a remote thread pointing to that code.
+- **`CreateRemoteThread`** – Creates a new thread in a different process. This is a foundational technique for process injection - write code to a target process's memory, then create a remote thread pointing to that code.
 - Both APIs internally call **`CreateRemoteThreadEx`** (the extended version), which in turn calls **`NtCreateThreadEx`** at the kernel level.
 
 ---
@@ -311,7 +311,7 @@ A **privilege** grants a security principal (user or process) the right to perfo
 
 **Powerful Privileges (Can Compromise the System):**
 
-- **`SeDebugPrivilege`** – Obtain unrestricted read/write access to any process. This is one of the most dangerous privileges—with it, an attacker can inject code into SYSTEM processes or extract sensitive data from any process.
+- **`SeDebugPrivilege`** – Obtain unrestricted read/write access to any process. This is one of the most dangerous privileges - with it, an attacker can inject code into SYSTEM processes or extract sensitive data from any process.
 - **`SeTakeOwnershipPrivilege`** – Take ownership of any securable object (file, registry key, process). Allows bypassing permissions.
 - **`SeRestorePrivilege`** – Replace any file on the system. Can be used to overwrite critical system binaries or plant malware.
 - **`SeLoadDriverPrivilege`** – Load arbitrary device drivers into the kernel. Drivers run with kernel privileges and can compromise the entire system.
