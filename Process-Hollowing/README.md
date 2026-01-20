@@ -1,6 +1,6 @@
 # Process Hollowing
 
-This folder demonstrates **Process Hollowing**—a sophisticated process injection technique that manipulates a suspended process's executable image in memory.
+This folder demonstrates **Process Hollowing** - a sophisticated process injection technique that manipulates a suspended process's executable image in memory.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
@@ -50,7 +50,7 @@ Finding the entry point requires navigating the PE structure in memory using und
 
 ### In This Folder
 
-The example demonstrates **entry point overwriting on cmd.exe**—suspending the process, locating its entry point through PE parsing, and replacing it with shellcode.
+The example demonstrates **entry point overwriting on cmd.exe** - suspending the process, locating its entry point through PE parsing, and replacing it with shellcode.
 
 **Flow:**
 ```
@@ -108,7 +108,7 @@ BOOL success = CreateProcessW(
 );
 ```
 
-Creates cmd.exe in a suspended state—before any of its code executes.
+Creates cmd.exe in a suspended state - before any of its code executes.
 
 ### Retrieving the PEB Address
 
@@ -145,7 +145,7 @@ BOOL readSuccess = ReadProcessMemory(
 );
 ```
 
-Reads the `ImageBaseAddress` from the PEB—this is where the PE is loaded in memory.
+Reads the `ImageBaseAddress` from the PEB - this is where the PE is loaded in memory.
 
 ### Reading the DOS Header
 
