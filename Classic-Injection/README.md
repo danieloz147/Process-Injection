@@ -1,6 +1,6 @@
 # Classic Injection
 
-This folder demonstrates **classic shellcode injection**—a fundamental process injection technique where raw machine code (shellcode) is allocated, written, and executed within a process's memory space.
+This folder demonstrates **classic shellcode injection** - a fundamental process injection technique where raw machine code (shellcode) is allocated, written, and executed within a process's memory space.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
