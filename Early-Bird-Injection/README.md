@@ -1,6 +1,6 @@
 # Early-Bird Injection
 
-This folder demonstrates **Early-Bird injection**—a process injection technique that combines process creation with APC queuing to guarantee shellcode execution at startup.
+This folder demonstrates **Early-Bird injection** - a process injection technique that combines process creation with APC queuing to guarantee shellcode execution at startup.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
@@ -12,7 +12,7 @@ Early-Bird injection is an advanced variant of APC injection that overcomes the 
 
 ### The Problem with Standard APC Injection
 
-Standard APC injection has a critical weakness: the shellcode only executes when the target thread enters an alertable state. There is **no guarantee** that this will happen in a reasonable timeframe—or at all. While queuing APCs on multiple threads increases the likelihood of execution, it introduces the risk of process crashes or detection.
+Standard APC injection has a critical weakness: the shellcode only executes when the target thread enters an alertable state. There is **no guarantee** that this will happen in a reasonable timeframe - or at all. While queuing APCs on multiple threads increases the likelihood of execution, it introduces the risk of process crashes or detection.
 
 ### The Early-Bird Solution
 
@@ -24,11 +24,11 @@ Early-Bird injection eliminates this timing uncertainty by:
 4. **Queue APC** – Queue an APC on the primary thread (which is suspended)
 5. **Resume Process** – Resume the main thread
 
-Since the thread is **guaranteed to exit the suspended state** when resumed, the APC **is guaranteed to execute**—even before the application's main code runs.
+Since the thread is **guaranteed to exit the suspended state** when resumed, the APC **is guaranteed to execute** - even before the application's main code runs.
 
 ### In This Folder
 
-The example demonstrates **Early-Bird injection into cmd.exe**—creating a suspended process, injecting shellcode via APC, and triggering execution.
+The example demonstrates **Early-Bird injection into cmd.exe** - creating a suspended process, injecting shellcode via APC, and triggering execution.
 
 **Flow:**
 ```
@@ -80,7 +80,7 @@ BOOL success = CreateProcessW(
 );
 ```
 
-Creates cmd.exe in a suspended state—the primary thread is paused before any of the process's code executes.
+Creates cmd.exe in a suspended state - the primary thread is paused before any of the process's code executes.
 
 ### Memory Allocation in Target
 
