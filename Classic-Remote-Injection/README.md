@@ -1,6 +1,6 @@
 # Classic Remote Injection
 
-This folder demonstrates **remote shellcode injection**—a process injection technique where raw machine code (shellcode) is allocated, written, and executed within a **different process's** memory space.
+This folder demonstrates **remote shellcode injection** - a process injection technique where raw machine code (shellcode) is allocated, written, and executed within a **different process's** memory space.
 
 **Important Disclaimer**: This code is for educational purposes only on systems you own or have explicit authorization to test. Unauthorized injection is illegal.
 
