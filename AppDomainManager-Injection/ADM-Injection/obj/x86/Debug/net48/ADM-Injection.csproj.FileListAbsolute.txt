@@ -1,0 +1,10 @@
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\bin\x86\Debug\net48\ADM_Injection.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\bin\x86\Debug\net48\ADM_Injection.pdb
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.csproj.AssemblyReference.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.AssemblyInfoInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.AssemblyInfo.cs
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.csproj.CoreCompileInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM-Injection.sourcelink.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM_Injection.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x86\Debug\net48\ADM_Injection.pdb

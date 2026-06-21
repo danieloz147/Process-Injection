@@ -1,0 +1,15 @@
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\bin\x64\Debug\net9.0\DemoApp.exe
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\bin\x64\Debug\net9.0\DemoApp.deps.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\bin\x64\Debug\net9.0\DemoApp.runtimeconfig.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\bin\x64\Debug\net9.0\DemoApp.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\bin\x64\Debug\net9.0\DemoApp.pdb
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.AssemblyInfoInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.AssemblyInfo.cs
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.csproj.CoreCompileInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.sourcelink.json
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\refint\DemoApp.dll
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.pdb
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\DemoApp.genruntimeconfig.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\DemoApp\obj\x64\Debug\net9.0\ref\DemoApp.dll

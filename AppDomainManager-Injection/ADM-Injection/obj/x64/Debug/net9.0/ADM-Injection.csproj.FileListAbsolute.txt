@@ -1,0 +1,5 @@
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x64\Debug\net9.0\ADM-Injection.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x64\Debug\net9.0\ADM-Injection.AssemblyInfoInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x64\Debug\net9.0\ADM-Injection.AssemblyInfo.cs
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x64\Debug\net9.0\ADM-Injection.csproj.CoreCompileInputs.cache
+C:\Users\DanielOz\Desktop\Coding\Process-Injection\AppDomainManager-Injection\ADM-Injection\obj\x64\Debug\net9.0\ADM-Injection.sourcelink.json
