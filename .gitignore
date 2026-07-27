@@ -140,3 +140,10 @@ Thumbs.db
 *.tmp
 temp/
 temp_*
+bin/
+obj/
+*.exe
+*.dll
+*.bin
+*.hex
+*.pdb
